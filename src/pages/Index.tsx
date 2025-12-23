@@ -1,15 +1,5 @@
 import { useState } from "react";
-import {
-  Users,
-  Building2,
-  Clock,
-  TrendingUp,
-  UserPlus,
-  Bell,
-  Search,
-  DollarSign,
-  ArrowUpRight,
-} from "lucide-react";
+import { Users, Building2, Clock, TrendingUp, UserPlus, Bell, Search, DollarSign, ArrowUpRight } from "lucide-react";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { MetricCard } from "@/components/dashboard/MetricCard";
 import { InvestorsList } from "@/components/dashboard/InvestorsList";
@@ -21,10 +11,8 @@ import { PropertyTypeChart } from "@/components/dashboard/PropertyTypeChart";
 import { RevenueChart } from "@/components/dashboard/RevenueChart";
 import { PropertyStatusChart } from "@/components/dashboard/PropertyStatusChart";
 import { InvestorGrowthChart } from "@/components/dashboard/InvestorGrowthChart";
-
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Sidebar />
 
       {/* Main Content */}
@@ -43,11 +31,7 @@ const Index = () => {
               {/* Search */}
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <input
-                  type="text"
-                  placeholder="Buscar..."
-                  className="w-64 pl-10 pr-4 py-2 rounded-lg bg-muted/50 border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                />
+                <input type="text" placeholder="Buscar..." className="w-64 pl-10 pr-4 py-2 rounded-lg bg-muted/50 border border-border text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all" />
               </div>
 
               {/* Notifications */}
@@ -74,45 +58,23 @@ const Index = () => {
         <div className="p-8">
           {/* Metrics Grid */}
           <div className="grid grid-cols-4 gap-6 mb-8">
-            <MetricCard
-              title="Novos Investidores"
-              value="12"
-              subtitle="Últimos 30 dias"
-              icon={UserPlus}
-              trend={{ value: 18, isPositive: true }}
-              variant="primary"
-            />
-            <MetricCard
-              title="Investidores Ativos"
-              value="47"
-              subtitle="Com imóveis na carteira"
-              icon={Users}
-              trend={{ value: 8, isPositive: true }}
-              variant="secondary"
-            />
-            <MetricCard
-              title="Aguardando Reserva"
-              value="8"
-              subtitle="Clientes na fila"
-              icon={Clock}
-              variant="warning"
-            />
-            <MetricCard
-              title="Processos Ativos"
-              value="15"
-              subtitle="Em trâmite"
-              icon={Building2}
-              trend={{ value: 5, isPositive: true }}
-            />
+            <MetricCard title="Novos Investidores" value="12" subtitle="Últimos 30 dias" icon={UserPlus} trend={{
+            value: 18,
+            isPositive: true
+          }} variant="primary" />
+            <MetricCard title="Investidores Ativos" value="47" subtitle="Com imóveis na carteira" icon={Users} trend={{
+            value: 8,
+            isPositive: true
+          }} variant="secondary" />
+            <MetricCard title="Aguardando Reserva" value="8" subtitle="Clientes na fila" icon={Clock} variant="warning" />
+            <MetricCard title="Processos Ativos" value="15" subtitle="Em trâmite" icon={Building2} trend={{
+            value: 5,
+            isPositive: true
+          }} />
           </div>
 
           {/* Revenue Overview */}
-          <div className="grid grid-cols-3 gap-6 mb-8">
-            <div className="col-span-2">
-              <RevenueChart />
-            </div>
-            <PropertyStatusChart />
-          </div>
+          
 
           {/* Charts Row */}
           <div className="grid grid-cols-3 gap-6 mb-8">
@@ -139,16 +101,10 @@ const Index = () => {
 
       {/* Gradient Glow Effect */}
       <div className="fixed top-0 right-0 w-[600px] h-[600px] pointer-events-none opacity-30">
-        <div
-          className="w-full h-full"
-          style={{
-            background:
-              "radial-gradient(ellipse at top right, hsl(24, 95%, 53%, 0.15) 0%, transparent 70%)",
-          }}
-        />
+        <div className="w-full h-full" style={{
+        background: "radial-gradient(ellipse at top right, hsl(24, 95%, 53%, 0.15) 0%, transparent 70%)"
+      }} />
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
