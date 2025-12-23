@@ -7,6 +7,8 @@ import {
   UserPlus,
   Bell,
   Search,
+  DollarSign,
+  ArrowUpRight,
 } from "lucide-react";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { MetricCard } from "@/components/dashboard/MetricCard";
@@ -15,10 +17,12 @@ import { ProcessChart } from "@/components/dashboard/ProcessChart";
 import { KanbanPreview } from "@/components/dashboard/KanbanPreview";
 import { AwaitingReservation } from "@/components/dashboard/AwaitingReservation";
 import { OngoingProcesses } from "@/components/dashboard/OngoingProcesses";
+import { PropertyTypeChart } from "@/components/dashboard/PropertyTypeChart";
+import { RevenueChart } from "@/components/dashboard/RevenueChart";
+import { PropertyStatusChart } from "@/components/dashboard/PropertyStatusChart";
+import { InvestorGrowthChart } from "@/components/dashboard/InvestorGrowthChart";
 
 const Index = () => {
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
-
   return (
     <div className="min-h-screen bg-background">
       <Sidebar />
@@ -102,18 +106,30 @@ const Index = () => {
             />
           </div>
 
-          {/* Charts and Lists */}
-          <div className="grid grid-cols-2 gap-6 mb-8">
-            <ProcessChart />
-            <InvestorsList />
-          </div>
-
-          {/* Kanban and Reservations */}
+          {/* Revenue Overview */}
           <div className="grid grid-cols-3 gap-6 mb-8">
             <div className="col-span-2">
-              <KanbanPreview />
+              <RevenueChart />
             </div>
+            <PropertyStatusChart />
+          </div>
+
+          {/* Charts Row */}
+          <div className="grid grid-cols-3 gap-6 mb-8">
+            <ProcessChart />
+            <PropertyTypeChart />
+            <InvestorGrowthChart />
+          </div>
+
+          {/* Investors and Kanban */}
+          <div className="grid grid-cols-2 gap-6 mb-8">
+            <InvestorsList />
             <AwaitingReservation />
+          </div>
+
+          {/* Kanban Preview */}
+          <div className="mb-8">
+            <KanbanPreview />
           </div>
 
           {/* Ongoing Processes */}
