@@ -1,35 +1,43 @@
-import { useState } from "react";
-import { Sidebar } from "@/components/layout/Sidebar";
-import { HeroBanner } from "@/components/streaming/HeroBanner";
-import { ContentRow } from "@/components/streaming/ContentRow";
-import { Top10Row } from "@/components/streaming/Top10Row";
-import { MovieModal } from "@/components/streaming/MovieModal";
-import { Movie, trendingMovies, newReleases, movies, series, actionMovies, dramaMovies, scifiMovies, allMovies } from "@/data/movies";
+import { AppLayout } from "@/components/layout/AppLayout";
+import { MetricCard } from "@/components/dashboard/MetricCard";
+import { SalesChart } from "@/components/dashboard/SalesChart";
+import { LeadSourceChart } from "@/components/dashboard/LeadSourceChart";
+import { FunnelChart } from "@/components/dashboard/FunnelChart";
+import { RecentLeads } from "@/components/dashboard/RecentLeads";
+import { UpcomingVisits } from "@/components/dashboard/UpcomingVisits";
+import { Users, Eye, FileText, TrendingUp, DollarSign } from "lucide-react";
 
 const Index = () => {
-  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-
   return (
-    <div className="min-h-screen bg-background">
-      <Sidebar />
-
-      <main className="pl-64 transition-all duration-300">
-        <HeroBanner onSelectMovie={setSelectedMovie} />
-
-        <div className="px-8 -mt-32 relative z-10">
-          <ContentRow title="🔥 Em Alta" movies={trendingMovies} onSelectMovie={setSelectedMovie} size="large" />
-          <Top10Row title="Top 10 no Brasil Hoje" movies={allMovies} onSelectMovie={setSelectedMovie} />
-          <ContentRow title="Lançamentos" movies={newReleases} onSelectMovie={setSelectedMovie} />
-          <ContentRow title="Filmes" movies={movies} onSelectMovie={setSelectedMovie} />
-          <ContentRow title="Séries" movies={series} onSelectMovie={setSelectedMovie} />
-          <ContentRow title="Ação & Aventura" movies={actionMovies} onSelectMovie={setSelectedMovie} />
-          <ContentRow title="Drama" movies={dramaMovies} onSelectMovie={setSelectedMovie} />
-          <ContentRow title="Ficção Científica" movies={scifiMovies} onSelectMovie={setSelectedMovie} />
+    <AppLayout title="Dashboard" subtitle="Visão geral da operação">
+      <div className="space-y-6">
+        {/* KPIs */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+          <MetricCard icon={Users} title="Leads do Dia" value="18" change="+12% vs ontem" changeType="positive" iconColor="bg-primary/10" />
+          <MetricCard icon={Eye} title="Visitas Agendadas" value="7" change="3 para hoje" changeType="neutral" iconColor="bg-chart-2/10" />
+          <MetricCard icon={FileText} title="Propostas Enviadas" value="12" change="+4 esta semana" changeType="positive" iconColor="bg-warning/10" />
+          <MetricCard icon={TrendingUp} title="Vendas do Mês" value="28" change="+18% vs mês anterior" changeType="positive" iconColor="bg-success/10" />
+          <MetricCard icon={DollarSign} title="Faturamento" value="R$ 840K" change="+22% vs mês anterior" changeType="positive" iconColor="bg-chart-4/10" />
         </div>
-      </main>
 
-      <MovieModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />
-    </div>
+        {/* Charts Row */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="lg:col-span-2">
+            <SalesChart />
+          </div>
+          <LeadSourceChart />
+        </div>
+
+        {/* Funnel + Recent */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <FunnelChart />
+          <RecentLeads />
+        </div>
+
+        {/* Visits */}
+        <UpcomingVisits />
+      </div>
+    </AppLayout>
   );
 };
 
