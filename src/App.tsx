@@ -12,6 +12,7 @@ import Agenda from "./pages/Agenda";
 import Documentos from "./pages/Documentos";
 import Financeiro from "./pages/Financeiro";
 import Formularios from "./pages/Formularios";
+import FormBuilderPage from "./pages/FormBuilder";
 import Automacoes from "./pages/Automacoes";
 import Relatorios from "./pages/Relatorios";
 import Configuracoes from "./pages/Configuracoes";
@@ -35,6 +36,8 @@ const App = () => (
           <Route path="/documentos" element={<Documentos />} />
           <Route path="/financeiro" element={<Financeiro />} />
           <Route path="/formularios" element={<Formularios />} />
+          <Route path="/formularios/novo" element={<FormBuilderPage />} />
+          <Route path="/formularios/:id" element={<FormBuilderPage />} />
           <Route path="/automacoes" element={<Automacoes />} />
           <Route path="/relatorios" element={<Relatorios />} />
           <Route path="/configuracoes" element={<Configuracoes />} />
