@@ -9,25 +9,27 @@ const visits = [
 
 export function UpcomingVisits() {
   return (
-    <div className="bg-card rounded-xl border border-border p-6 animate-fade-up">
-      <div className="flex items-center justify-between mb-5">
+    <div className="bg-card rounded-xl border border-border p-4 sm:p-6 animate-fade-up hover:shadow-md transition-shadow duration-300">
+      <div className="flex items-center justify-between mb-4 sm:mb-5">
         <div>
-          <h3 className="text-base font-semibold text-foreground">Próximas Visitas</h3>
-          <p className="text-sm text-muted-foreground">Agenda de hoje e amanhã</p>
+          <h3 className="text-sm sm:text-base font-semibold text-foreground">Próximas Visitas</h3>
+          <p className="text-xs sm:text-sm text-muted-foreground">Agenda de hoje e amanhã</p>
         </div>
-        <button className="text-sm text-primary font-medium hover:underline">Ver agenda</button>
+        <button className="text-xs sm:text-sm text-primary font-medium hover:underline">Ver agenda</button>
       </div>
-      <div className="space-y-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
         {visits.map((v, i) => (
-          <div key={i} className="p-3 rounded-lg border border-border hover:border-primary/30 transition-colors">
+          <div key={i} className="p-3 sm:p-4 rounded-lg border border-border hover:border-primary/30 hover:shadow-sm transition-all duration-200 group">
             <div className="flex items-center justify-between mb-1.5">
-              <p className="text-sm font-medium text-foreground">{v.client}</p>
-              <span className="text-xs text-muted-foreground flex items-center gap-1"><Calendar className="w-3 h-3" />{v.date}</span>
+              <p className="text-xs sm:text-sm font-medium text-foreground truncate">{v.client}</p>
+              <span className="text-[10px] sm:text-xs text-muted-foreground flex items-center gap-1 flex-shrink-0 ml-2">
+                <Calendar className="w-3 h-3" />{v.date}
+              </span>
             </div>
-            <p className="text-xs text-muted-foreground mb-1">{v.property}</p>
-            <div className="flex items-center gap-3 text-xs text-muted-foreground">
+            <p className="text-[10px] sm:text-xs text-muted-foreground mb-1.5 truncate">{v.property}</p>
+            <div className="flex items-center gap-3 text-[10px] sm:text-xs text-muted-foreground">
               <span className="flex items-center gap-1"><Clock className="w-3 h-3" />{v.time}</span>
-              <span className="flex items-center gap-1"><MapPin className="w-3 h-3" />{v.address}</span>
+              <span className="flex items-center gap-1 truncate"><MapPin className="w-3 h-3 flex-shrink-0" />{v.address}</span>
             </div>
           </div>
         ))}

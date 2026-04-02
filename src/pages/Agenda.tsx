@@ -14,29 +14,30 @@ const events = [
 ];
 
 const typeColors: Record<string, string> = {
-  visita: "bg-primary/10 border-l-primary",
-  reuniao: "bg-warning/10 border-l-warning",
-  contrato: "bg-success/10 border-l-success",
+  visita: "border-l-primary bg-primary/5",
+  reuniao: "border-l-warning bg-warning/5",
+  contrato: "border-l-success bg-success/5",
 };
 
 const Agenda = () => (
   <AppLayout title="Agenda" subtitle="Visitas e compromissos">
-    <div className="space-y-6 max-w-3xl">
+    <div className="space-y-4 sm:space-y-6 max-w-3xl">
       {events.map((day) => (
         <div key={day.date}>
           <div className="flex items-center gap-2 mb-3">
             <Calendar className="w-4 h-4 text-primary" />
-            <h3 className="text-sm font-semibold text-foreground">{day.day}, {day.date}</h3>
+            <h3 className="text-xs sm:text-sm font-semibold text-foreground">{day.day}, {day.date}</h3>
           </div>
           <div className="space-y-2">
             {day.items.map((item, i) => (
-              <div key={i} className={`p-4 rounded-lg border-l-4 ${typeColors[item.type]} bg-card border border-border`}>
+              <div key={i} className={`p-3 sm:p-4 rounded-lg border-l-4 ${typeColors[item.type]} border border-border hover:shadow-sm transition-all duration-200`}>
                 <div className="flex items-center gap-2 mb-1">
-                  <Clock className="w-3.5 h-3.5 text-muted-foreground" />
-                  <span className="text-sm font-medium text-foreground">{item.time} - {item.title}</span>
+                  <Clock className="w-3.5 h-3.5 text-muted-foreground flex-shrink-0" />
+                  <span className="text-xs sm:text-sm font-medium text-foreground">{item.time} - {item.title}</span>
                 </div>
-                <div className="flex items-center gap-1 text-xs text-muted-foreground ml-5">
-                  <MapPin className="w-3 h-3" />{item.location}
+                <div className="flex items-center gap-1 text-[10px] sm:text-xs text-muted-foreground ml-5 sm:ml-6">
+                  <MapPin className="w-3 h-3 flex-shrink-0" />
+                  <span className="truncate">{item.location}</span>
                 </div>
               </div>
             ))}

@@ -10,9 +10,9 @@ import { Users, Eye, FileText, TrendingUp, DollarSign } from "lucide-react";
 const Index = () => {
   return (
     <AppLayout title="Dashboard" subtitle="Visão geral da operação">
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         {/* KPIs */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
           <MetricCard icon={Users} title="Leads do Dia" value="18" change="+12% vs ontem" changeType="positive" iconColor="bg-primary/10" />
           <MetricCard icon={Eye} title="Visitas Agendadas" value="7" change="3 para hoje" changeType="neutral" iconColor="bg-chart-2/10" />
           <MetricCard icon={FileText} title="Propostas Enviadas" value="12" change="+4 esta semana" changeType="positive" iconColor="bg-warning/10" />
@@ -21,7 +21,7 @@ const Index = () => {
         </div>
 
         {/* Charts Row */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-4">
           <div className="lg:col-span-2">
             <SalesChart />
           </div>
@@ -29,7 +29,7 @@ const Index = () => {
         </div>
 
         {/* Funnel + Recent */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
           <FunnelChart />
           <RecentLeads />
         </div>

@@ -21,29 +21,25 @@ const statusColors: Record<string, string> = {
 const Imoveis = () => (
   <AppLayout title="Imóveis" subtitle="Catálogo de imóveis">
     <div className="space-y-4">
-      <div className="flex items-center justify-between gap-4">
-        <div className="relative flex-1 max-w-md">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4">
+        <div className="relative flex-1 max-w-full sm:max-w-md">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <Input placeholder="Buscar imóveis..." className="pl-10" />
         </div>
-        <Button size="sm"><Plus className="w-4 h-4 mr-1" />Novo Imóvel</Button>
+        <Button size="sm" className="sm:w-auto"><Plus className="w-4 h-4 mr-1" />Novo Imóvel</Button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
         {imoveis.map((im) => (
-          <div key={im.id} className="bg-card rounded-xl border border-border overflow-hidden hover:border-primary/30 transition-colors cursor-pointer">
-            <div className="h-40 bg-muted flex items-center justify-center">
-              <Building2 className="w-10 h-10 text-muted-foreground/30" />
+          <div key={im.id} className="bg-card rounded-xl border border-border overflow-hidden hover:border-primary/30 hover:shadow-md transition-all duration-300 cursor-pointer group">
+            <div className="h-32 sm:h-40 bg-muted flex items-center justify-center relative overflow-hidden">
+              <Building2 className="w-10 h-10 text-muted-foreground/30 group-hover:scale-110 transition-transform duration-300" />
+              <Badge variant="outline" className={`absolute top-3 right-3 text-[10px] ${statusColors[im.status] || ""}`}>{im.status}</Badge>
             </div>
-            <div className="p-5">
-              <div className="flex items-start justify-between mb-2">
-                <div>
-                  <p className="font-semibold text-foreground">{im.title}</p>
-                  <p className="text-xs text-muted-foreground">{im.city} · {im.type}</p>
-                </div>
-                <Badge variant="outline" className={statusColors[im.status] || ""}>{im.status}</Badge>
-              </div>
-              <p className="text-lg font-bold text-primary mb-3">{im.price}</p>
-              <div className="flex items-center gap-4 text-xs text-muted-foreground">
+            <div className="p-4 sm:p-5">
+              <p className="font-semibold text-foreground text-sm sm:text-base truncate">{im.title}</p>
+              <p className="text-xs text-muted-foreground mb-2">{im.city} · {im.type}</p>
+              <p className="text-base sm:text-lg font-bold text-primary mb-3">{im.price}</p>
+              <div className="flex items-center gap-3 sm:gap-4 text-[10px] sm:text-xs text-muted-foreground">
                 {im.rooms > 0 && <span className="flex items-center gap-1"><BedDouble className="w-3.5 h-3.5" />{im.rooms}Q</span>}
                 <span className="flex items-center gap-1"><Bath className="w-3.5 h-3.5" />{im.baths}B</span>
                 <span className="flex items-center gap-1"><Car className="w-3.5 h-3.5" />{im.parking}V</span>
