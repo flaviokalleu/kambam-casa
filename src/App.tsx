@@ -12,6 +12,7 @@ import Agenda from "./pages/Agenda";
 import Documentos from "./pages/Documentos";
 import Financeiro from "./pages/Financeiro";
 import Formularios from "./pages/Formularios";
+import FormBuilderPage from "./pages/FormBuilder";
 import Automacoes from "./pages/Automacoes";
 import Relatorios from "./pages/Relatorios";
 import Configuracoes from "./pages/Configuracoes";

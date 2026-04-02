@@ -1,43 +1,70 @@
+import { useNavigate } from "react-router-dom";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { Button } from "@/components/ui/button";
-import { Plus, ClipboardList, Copy, ExternalLink } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Plus, ClipboardList, Copy, ExternalLink, Edit, Eye, Globe, Lock } from "lucide-react";
+import { DEFAULT_TEMPLATES } from "@/lib/form-builder-types";
+import { useToast } from "@/hooks/use-toast";
 
-const templates = [
-  { name: "Cadastro Completo Cliente", fields: 12, uses: 48, updated: "01/04/2026" },
-  { name: "Pré-Aprovação Financiamento", fields: 8, uses: 32, updated: "28/03/2026" },
-  { name: "Cadastro Rápido Lead", fields: 5, uses: 120, updated: "02/04/2026" },
-  { name: "Ficha de Visita", fields: 10, uses: 65, updated: "30/03/2026" },
-  { name: "Envio de Documentos", fields: 6, uses: 28, updated: "25/03/2026" },
-];
+const Formularios = () => {
+  const navigate = useNavigate();
+  const { toast } = useToast();
 
-const Formularios = () => (
-  <AppLayout title="Formulários" subtitle="Form Builder e templates personalizáveis">
-    <div className="space-y-4">
-      <div className="flex justify-end">
-        <Button size="sm"><Plus className="w-4 h-4 mr-1" />Novo Formulário</Button>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {templates.map((t) => (
-          <div key={t.name} className="bg-card rounded-xl border border-border p-5 hover:border-primary/30 transition-colors">
-            <div className="flex items-start gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                <ClipboardList className="w-5 h-5 text-primary" />
+  const handleDuplicate = (name: string) => {
+    toast({ title: "Formulário duplicado!", description: `"${name}" foi duplicado com sucesso.` });
+  };
+
+  return (
+    <AppLayout title="Formulários" subtitle="Form Builder e templates personalizáveis">
+      <div className="space-y-4">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <p className="text-xs sm:text-sm text-muted-foreground">
+            {DEFAULT_TEMPLATES.length} formulários criados
+          </p>
+          <Button size="sm" onClick={() => navigate("/formularios/novo")}>
+            <Plus className="w-4 h-4 mr-1" />Novo Formulário
+          </Button>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-3 sm:gap-4">
+          {DEFAULT_TEMPLATES.map((t) => (
+            <div
+              key={t.id}
+              className="bg-card rounded-xl border border-border p-4 sm:p-5 hover:border-primary/30 hover:shadow-md transition-all duration-300 group cursor-pointer"
+              onClick={() => navigate(`/formularios/${t.id}`)}
+            >
+              <div className="flex items-start gap-3 mb-3">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                  <ClipboardList className="w-5 h-5 text-primary" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-foreground text-sm truncate">{t.name}</p>
+                  <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5">
+                    {t.sections.reduce((sum, s) => sum + s.fields.length, 0)} campos · {t.uses} usos
+                  </p>
+                </div>
+                <Badge variant="outline" className={t.isPublic ? "bg-success/10 text-success border-success/20 text-[10px]" : "text-[10px]"}>
+                  {t.isPublic ? <><Globe className="w-3 h-3 mr-1" />Público</> : <><Lock className="w-3 h-3 mr-1" />Privado</>}
+                </Badge>
               </div>
-              <div className="flex-1">
-                <p className="font-medium text-foreground text-sm">{t.name}</p>
-                <p className="text-xs text-muted-foreground mt-0.5">{t.fields} campos · {t.uses} usos</p>
+
+              {t.description && (
+                <p className="text-xs text-muted-foreground mb-3 line-clamp-2">{t.description}</p>
+              )}
+
+              <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
+                <Button variant="outline" size="sm" className="flex-1 text-xs" onClick={() => navigate(`/formularios/${t.id}`)}>
+                  <Edit className="w-3 h-3 mr-1" />Editar
+                </Button>
+                <Button variant="outline" size="sm" className="flex-1 text-xs" onClick={() => handleDuplicate(t.name)}>
+                  <Copy className="w-3 h-3 mr-1" />Duplicar
+                </Button>
               </div>
             </div>
-            <p className="text-xs text-muted-foreground mb-3">Atualizado: {t.updated}</p>
-            <div className="flex gap-2">
-              <Button variant="outline" size="sm" className="flex-1 text-xs"><Copy className="w-3 h-3 mr-1" />Duplicar</Button>
-              <Button variant="outline" size="sm" className="flex-1 text-xs"><ExternalLink className="w-3 h-3 mr-1" />Link Público</Button>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  </AppLayout>
-);
+    </AppLayout>
+  );
+};
 
 export default Formularios;
