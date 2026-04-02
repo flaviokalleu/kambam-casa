@@ -1,4 +1,5 @@
 import { AppLayout } from "@/components/layout/AppLayout";
+import { Badge } from "@/components/ui/badge";
 
 const columns = [
   { title: "Novos Leads", color: "hsl(220,70%,45%)", cards: [
@@ -26,23 +27,23 @@ const columns = [
 
 const Funil = () => (
   <AppLayout title="Funil de Vendas" subtitle="Acompanhe o progresso dos negócios">
-    <div className="flex gap-4 overflow-x-auto pb-4">
+    <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 -mx-3 px-3 sm:-mx-0 sm:px-0 snap-x snap-mandatory sm:snap-none">
       {columns.map((col) => (
-        <div key={col.title} className="min-w-[260px] w-[260px] flex-shrink-0">
+        <div key={col.title} className="min-w-[220px] sm:min-w-[260px] w-[220px] sm:w-[260px] flex-shrink-0 snap-start">
           <div className="flex items-center gap-2 mb-3 px-1">
-            <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: col.color }} />
-            <h3 className="text-sm font-semibold text-foreground">{col.title}</h3>
-            <span className="text-xs text-muted-foreground ml-auto">{col.cards.length}</span>
+            <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: col.color }} />
+            <h3 className="text-xs sm:text-sm font-semibold text-foreground truncate">{col.title}</h3>
+            <Badge variant="secondary" className="ml-auto text-[10px] h-5 min-w-[20px] justify-center">{col.cards.length}</Badge>
           </div>
           <div className="space-y-2">
             {col.cards.map((card, i) => (
-              <div key={i} className="bg-card rounded-lg border border-border p-3 cursor-grab hover:border-primary/30 transition-colors">
-                <p className="text-sm font-medium text-foreground">{card.name}</p>
-                <p className="text-xs text-muted-foreground mt-0.5">{card.property} · {card.time}</p>
+              <div key={i} className="bg-card rounded-lg border border-border p-3 cursor-grab hover:border-primary/30 hover:shadow-sm transition-all duration-200 active:shadow-md active:scale-[0.98]">
+                <p className="text-xs sm:text-sm font-medium text-foreground">{card.name}</p>
+                <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5">{card.property} · {card.time}</p>
               </div>
             ))}
             {col.cards.length === 0 && (
-              <div className="border-2 border-dashed border-border rounded-lg p-6 text-center text-xs text-muted-foreground">
+              <div className="border-2 border-dashed border-border rounded-lg p-4 sm:p-6 text-center text-[10px] sm:text-xs text-muted-foreground">
                 Arraste cards aqui
               </div>
             )}
