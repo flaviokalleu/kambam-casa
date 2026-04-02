@@ -1,27 +1,29 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
-  LayoutDashboard,
-  Users,
-  Building2,
-  ClipboardList,
-  Bell,
-  FileText,
-  Calendar,
+  Home,
+  Search,
+  Film,
+  Tv,
+  Clock,
+  Heart,
+  Download,
+  TrendingUp,
   ChevronLeft,
   ChevronRight,
-  TrendingUp,
+  Play,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const menuItems = [
-  { icon: LayoutDashboard, label: "Dashboard", path: "/" },
-  { icon: Users, label: "Investidores", path: "/investidores" },
-  { icon: Building2, label: "Imóveis", path: "/imoveis" },
-  { icon: ClipboardList, label: "Kanban", path: "/kanban" },
-  { icon: Bell, label: "Lembretes", path: "/lembretes" },
-  { icon: FileText, label: "Laudos", path: "/laudos" },
-  { icon: Calendar, label: "Vencimentos", path: "/vencimentos" },
+  { icon: Home, label: "Início", path: "/" },
+  { icon: Search, label: "Buscar", path: "/buscar" },
+  { icon: Film, label: "Filmes", path: "/filmes" },
+  { icon: Tv, label: "Séries", path: "/series" },
+  { icon: TrendingUp, label: "Em Alta", path: "/em-alta" },
+  { icon: Clock, label: "Assistir Depois", path: "/assistir-depois" },
+  { icon: Heart, label: "Favoritos", path: "/favoritos" },
+  { icon: Download, label: "Downloads", path: "/downloads" },
 ];
 
 export function Sidebar() {
@@ -39,11 +41,11 @@ export function Sidebar() {
       <div className="h-20 flex items-center justify-center border-b border-sidebar-border px-4">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center glow-primary">
-            <TrendingUp className="w-5 h-5 text-primary-foreground" />
+            <Play className="w-5 h-5 text-primary-foreground fill-current" />
           </div>
           {!collapsed && (
-            <span className="font-semibold text-lg text-foreground">
-              InvestImob
+            <span className="font-bold text-xl text-foreground tracking-tight">
+              Stream<span className="text-primary">Flix</span>
             </span>
           )}
         </div>
@@ -51,7 +53,7 @@ export function Sidebar() {
 
       {/* Navigation */}
       <nav className="flex-1 py-6 px-3">
-        <ul className="space-y-2">
+        <ul className="space-y-1">
           {menuItems.map((item) => {
             const isActive = location.pathname === item.path;
             return (
@@ -62,7 +64,7 @@ export function Sidebar() {
                     "flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200",
                     "hover:bg-sidebar-accent group",
                     isActive
-                      ? "bg-primary/10 text-primary border-l-2 border-primary"
+                      ? "bg-primary/10 text-primary"
                       : "text-muted-foreground hover:text-foreground"
                   )}
                 >
